@@ -538,7 +538,7 @@
   const isScrollable = elem => !!(elem.scrollHeight > elem.clientHeight); // borrowed from https://stackoverflow.com/a/46352119
 
   const hasCssAnimation = elem => {
-    const style = window.getComputedStyle(elem);
+const style = window.getComputedStyle(elem);
     const animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
     const transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
     return animDuration > 0 || transDuration > 0;
@@ -926,9 +926,9 @@
       inputContainer.className = inputClass;
 
       if (rerender) {
-        hide(inputContainer);
+        hide(inputContainer);     
       }
-    });
+});
 
     if (params.input) {
       if (rerender) {
