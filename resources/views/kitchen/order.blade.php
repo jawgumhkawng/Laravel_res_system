@@ -16,11 +16,45 @@
                 <li class="breadcrumb-item active">Order Page</li>
               </ol>
             </div><!-- /.col -->
-          </div><!-- /.row -->
+          </div>
+                    
+             @if (session('message'))
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+            @endif
+
+             @if (session('ready'))
+
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ session('ready') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+            @endif
+
+             @if (session('cancel'))
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ session('cancel') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+            @endif
+            <!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-      <section class="content">
+  <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
@@ -32,33 +66,28 @@
             <table id="example2" class="table table-bordered table-striped table-dark">
                 <thead>
                 <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
+                    <th class="text-center">Dish Name</th>
+                    <th class="text-center">Table Number</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center"># Action</th>
+                    
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>U</td>
+               @foreach ($orders as $order)
+                  <tr>
+                    <td class="text-center">{{ $order->dish->name}}</td>
+                    <td class="text-center">Table No - {{ $order->table_id }}</td>
+                    <td class="text-center"><span class="btn btn-sm {{ $status[$order->status] == 'new' ? 'btn-success' : 'btn-info' }}">{{ $status[$order->status] }}</span></td>
+                    <td class="text-center"> 
+                      <a href="/order/{{ $order->id }}/cancel" class="btn btn-sm btn-danger">Cancel</a>
+                      <a href="/order/{{ $order->id }}/approve" class="btn btn-sm btn-info">Approve</a>                      
+                      <a href="/order/{{ $order->id }}/ready" class="btn btn-sm btn-success">ready</a>
+                    </td>
                 </tr>
+               @endforeach
                 </tbody>
-
-                <tfoot>
-                <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                </tr>
-                </tfoot>
             </table>
             </div>
         </div>

@@ -24,6 +24,26 @@
     </div>
     <div class="card-body">
       <div class="container-fluit ">
+         @if (session('message'))
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Created!</strong> {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+         @endif
+          @if (session('serve'))
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Created!</strong> {{ session('serve') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+         @endif
       <div class="row">
           <div class="col-lg-12 ">
             <div class="card card-primary card-tabs">
@@ -39,9 +59,10 @@
                   
                 </ul>
               </div>
-              <div class="card-body bg-dark p-5">
+              <div class="card-body bg-dark p-5">                
                 <div class="tab-content" id="custom-tabs-one-tabContent">
                   <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                   <p>---Dish List---</p><hr>
                    <form action="{{ route('order.submit') }}" method="post">
                     @csrf
                    <div class="row">
@@ -61,11 +82,69 @@
                     </div>
                     <hr><br>
 
-                    <input type="submit" name="" value="submit" id="" class="col-lg-12 btn btn-success">
+                    <div class="d-flex">
+                    <div class="col-sm-3 mr-3">
+                      <!-- select -->
+                      <div class="form-group d-flex">
+                        <label class="mr-3 d-inline">Table Number</label>
+                        <select class="form-control bg-dark" name="table">
+                          @foreach ($tables as $table)
+                             <option value="{{ $table->id }}">{{ $table->number }}</option>
+                          @endforeach
+                         
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="">
+                      <input type="submit" name="" value="submit" id="" class="col-lg-12 px-5 btn btn-success">
+                    </div>
+                    </div>
+
                   </form>        
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
-                     Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                     
+                     <section class="content">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-12">
+                                <div class="card bg-dark">
+                                    <div class="card-header">
+                                    <h3 class="card-title">Order Serve Lists</h3>
+                                    </div>
+                                <div class="card-body ">
+                                <table id="example2" class="table table-bordered table-striped table-dark">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Dish Name</th>
+                                        <th class="text-center">Table Number</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center"># Action</th>
+                                        
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                  @foreach ($orders as $order)
+                                      <tr>
+                                        <td class="text-center">{{ $order->dish->name}}</td>
+                                        <td class="text-center">Table No - {{ $order->table_id }}</td>
+                                        <td class="text-center"><span class="btn btn-sm {{ $status[$order->status] == 'new' ? 'btn-success' : 'btn-info' }}">{{ $status[$order->status] }}</span></td>
+                                        <td class="text-center"> 
+                                          <a href="/order/{{ $order->id }}/serve" class="btn btn-sm btn-success">serve</a>
+                                          
+                                        </td>
+                                    </tr>
+                                  @endforeach
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </section>
                   </div>
                  
                 </div>

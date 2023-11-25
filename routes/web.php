@@ -33,6 +33,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/', [App\Http\Controllers\OrdersController::class, 'index'])->name('order.form');
 Route::post('order_submit', [App\Http\Controllers\OrdersController::class, 'submit'])->name('order.submit');
+Route::get('order/{order}/serve', [App\Http\Controllers\OrdersController::class, 'serve']);
+
+
+Route::get('order',[App\Http\Controllers\DishesController::class, 'order'])->name('kitchen.order');
+Route::get('order/{order}/approve', [App\Http\Controllers\DishesController::class, 'approve']);
+Route::get('order/{order}/cancel', [App\Http\Controllers\DishesController::class, 'cancel']);
+Route::get('order/{order}/ready', [App\Http\Controllers\DishesController::class, 'ready']);
+
 
 Route::resource('dish', App\Http\Controllers\DishesController::class);
 

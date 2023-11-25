@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DishCreateRequest;
-use App\Models\Category;
 use App\Models\Dish;
+use App\Models\Order;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\DishCreateRequest;
 
 class DishesController extends Controller
 {
@@ -100,5 +101,40 @@ class DishesController extends Controller
         $dish->delete();
 
         return redirect('dish')->with('Deleted', 'Dish Removed Successfully!');
+    }
+
+    public function order()
+    {
+        $orders = Order::whereIn('status',[1,2])->get();
+
+        $rawstatus = config('res.order_status');
+        $status = array_flip($rawstatus);
+
+        return view('kitchen.order', compact('orders','status'));
+        
+    }
+
+    public function approve(Order $order)
+    {
+        $order->status = config('res.order_status.processing');
+        $order->save();
+
+        return redirect('order')->with('message', 'Order Approve!');
+    }
+
+      public function cancel(Order $order)
+    {
+        $order->status = config('res.order_status.cancel');
+        $order->save();
+
+        return redirect('order')->with('cancel', 'Order Canceled!');
+    }
+
+      public function ready(Order $order)
+    {
+        $order->status = config('res.order_status.ready');
+        $order->save();
+
+        return redirect('order')->with('ready', 'Order Ready!');
     }
 }

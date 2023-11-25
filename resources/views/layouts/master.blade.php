@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Kitchen Pannel</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -80,7 +80,7 @@
       <a href="/home" class="brand-link">
         <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
           style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Kitchen Pannel</span>
       </a>
 
       <!-- Sidebar -->
@@ -91,7 +91,7 @@
             <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            {{-- <a href="/home" class="d-block">{{ Auth::user()->name }}</a> --}}
+            <a href="/home" class="d-block">{{ Auth::user()->name }}</a>
           </div>
         </div>
 
@@ -112,13 +112,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/dish" class="nav-link ">
+                  <a href="/dish" class="nav-link {{ Request::segment(1) == 'dish' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-cocktail"></i>
                     <p>Dishes</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/order" class="nav-link ">
+                  <a href="/order" class="nav-link {{ Request::segment(1) == 'order' ? 'active' : '' }}">
                     <i class=" nav-icon fas fa-book"></i>
                     <p>Orders</p>
                   </a>
