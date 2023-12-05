@@ -114,19 +114,31 @@
                 <li class="nav-item">
                   <a href="/dish" class="nav-link {{ Request::segment(1) == 'dish' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-cocktail"></i>
-                    <p>Dishes</p>
+                    <p>Dishes
+                      <span class="right badge badge-danger"></span>
+                    </p>
+                  </a>
+                </li>
+                 <li class="nav-item">
+                  <a href="/category" class="nav-link {{ Request::segment(1) == 'category' ? 'active' : '' }}">
+                    <i class=" nav-icon fas fa-th-list"></i>
+                    <p>Category
+                      <span class="right badge badge-danger"></span>
+                    </p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/order" class="nav-link {{ Request::segment(1) == 'order' ? 'active' : '' }}">
                     <i class=" nav-icon fas fa-book"></i>
-                    <p>Orders</p>
+                    <p>Orders
+                       <span class="right badge badge-danger"></span>
+                    </p>
                   </a>
                 </li>
               </ul>
             </li>
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
+              <a href="pages/widgets.html" class="nav-link active">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Widgets

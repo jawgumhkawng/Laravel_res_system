@@ -6,15 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Waiter Pnnel</title>
       <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
-  <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="/plugins/sweetalert2/sweetalert2.min.css">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+ <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />">
    
 </head>
 <body class="bg-dark">
@@ -26,70 +19,105 @@
       <div class="container-fluit ">
          @if (session('message'))
 
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Created!</strong> {{ session('message') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Success!</strong>{{session('message')}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
 
          @endif
           @if (session('serve'))
 
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Created!</strong> {{ session('serve') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Success!</strong>{{session('serve')}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
 
          @endif
       <div class="row">
           <div class="col-lg-12 ">
             <div class="card card-primary card-tabs">
-              <div class="card-header p-0 pt-1 bg-dark">
-                <ul class="nav nav-tabs p-3" id="custom-tabs-one-tab" role="tablist">
+              <div class="card-header p-3  bg-dark">
+
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active position-relative" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dishes
+                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                     9+
+                  </span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link position-relative" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Serve
+                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    99+
+                   
+                  </span>
+                  </button>
+                </li>
+                 <li class="nav-item" role="presentation">
+                  <a href="/" class="nav-link">Home</a>
+                </li>
+                              
+              </ul>
+
+              <div class="col ">
+                            <form action="{{ route('order.search') }}" method="get">
+                              @csrf
+                                <div class="input-group">
+                                <input type="search" name="key" class="form-control rounded bg-dark text-white shadow-lg  " style="border:1px solid gray" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+                              </div>
+                            </form>
+                        </div>
+               <div class="card-body bg-dark p-5"> 
+              <div class="tab-content" id="pills-tabContent">
+             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+
                   
-                  <li class="nav-item">
-                    <a class="nav-link active btn btn-warning" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Home</a>
-                  </li>&nbsp;&nbsp; 
-                  <li class="nav-item">
-                    <a class="nav-link btn btn-success" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Profile</a>
-                  </li>
-                  
-                </ul>
-              </div>
-              <div class="card-body bg-dark p-5">                
-                <div class="tab-content" id="custom-tabs-one-tabContent">
-                  <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                   <p>---Dish List---</p><hr>
+                  <p>---Dish List---</p>
+                       
+                   <hr>
                    <form action="{{ route('order.submit') }}" method="post">
                     @csrf
-                   <div class="row">
-                    @foreach ($dishes as $dish )
+
+                   
+                      <div class="row">
+                       
+                    @forelse ($dishes as $dish )
                       
-                       <div class="col-lg-4 mb-3">
+                       <div class="col-lg-4 mb-5">
                           <div class="card bg-dark shadow-lg" style="width: 18rem;">
                           <img src="{{ url('./images/'.$dish->image) }}" class="card-img-top "  height="230px" style="border: 1.5px solid gray; border-radius:8px">
                           <div class="card-body d-flex">
-                            <h3 class="mt-0 mb-0  mr-5">{{ $dish->name }}</h3>
-                            <input type="number" value="0" name="{{ $dish->id }}" class="bg-dark" style="width: 40px;  ">
+                            <h5 class="mt-0 mb-0  me-5 text-white">{{ $dish->name }}</h5>
+                            <input type="number" value="0" name="{{ $dish->id }}" class="bg-dark text-white " style="width: 40px;  ">
                           </div>
                         </div>
                        </div> 
 
-                     @endforeach
+                     @empty
+
+                       <h3 class="text-white">Result Not Found!</h3>
+
+                     @endforelse
+
+                     {{ $dishes->links() }}
+                     {{-- {{ $paginator->links('dishes') }} --}}
                     </div>
+                   
+                  
+
+                    
                     <hr><br>
 
                     <div class="d-flex">
                     <div class="col-sm-3 mr-3">
                       <!-- select -->
                       <div class="form-group d-flex">
-                        <label class="mr-3 d-inline">Table Number</label>
-                        <select class="form-control bg-dark" name="table">
+                        <label class="mr-3 d-inline text-white">Table Number</label>
+                        <select class="form-control bg-dark text-white " name="table"  >
                           @foreach ($tables as $table)
-                             <option value="{{ $table->id }}">{{ $table->number }}</option>
+                             <option class="text-white" value="{{ $table->id }}">{{ $table->number }}</option>
                           @endforeach
                          
                         </select>
@@ -97,14 +125,16 @@
                     </div>
 
                     <div class="">
-                      <input type="submit" name="" value="submit" id="" class="col-lg-12 px-5 btn btn-success">
+                      <input type="submit" name="" value="submit" id="" class="col-lg-12 px-5 py-2 ms-3 btn btn-success">
                     </div>
                     </div>
 
                   </form>        
                   </div>
-                  <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
-                     
+
+                </div>
+                  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                  
                      <section class="content">
                         <div class="container-fluid">
                           <div class="row">
@@ -145,25 +175,16 @@
                         </div>
                         </div>
                     </section>
-                  </div>
-                 
                 </div>
+               
               </div>
-              <!-- /.card -->
+              </div>
             </div>
           </div>
       </div>
-  </div>
+      </div>  
     </div>
   </div>
-
-    <!-- jQuery -->
-<script src="/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/dist/js/demo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

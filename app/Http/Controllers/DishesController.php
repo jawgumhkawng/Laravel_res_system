@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\DishCreateRequest;
+use Illuminate\Database\Eloquent\Builder;
 
 class DishesController extends Controller
 {
@@ -72,7 +73,7 @@ class DishesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dish $dish)
+     public function update(Request $request, Dish $dish)
     {
         request()->validate([
             'name' => 'required',
@@ -85,13 +86,17 @@ class DishesController extends Controller
         if($request->dish_image){
             $imageName = date('YmdHis'). "." .request()->dish_image->getClientOriginalExtension();
             request()->dish_image->move(public_path('images'), $imageName);
-            $dish_image = $imageName;
+            $dish->image = $imageName;
         }
 
         $dish->save();
 
         return redirect('dish')->with('Updated', 'Dish Updated Successfully!');
     }
+
+
+   
+    
 
     /**
      * Remove the specified resource from storage.

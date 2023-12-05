@@ -529,7 +529,19 @@
                 @foreach ($dishes as $dish )
                     <tr>
                     <td>{{$dish->name}}</td>
-                    <td class="text-center">{{$dish->category->name}}</td>
+                    <td class="text-center ">
+                      @if($dish->category->id == 1)
+                    <span class="btn btn-sm btn-success">{{$dish->category->name}}</span>
+                    @elseif($dish->category->id == 2)
+                    <span class="btn btn-sm btn-info">{{$dish->category->name}}</span>
+                    @elseif($dish->category->id == 3)
+                    <span class="btn btn-sm btn-warning">{{$dish->category->name}}</span>
+                    @elseif($dish->category->id == 4)
+                    <span class="btn btn-sm btn-secondary">{{$dish->category->name}}</span>
+                    @else
+                    <span class="btn btn-sm btn-danger">{{$dish->category->name}}</span>
+                    @endif
+                  </td>
                     <td class="text-center">{{ $dish->created_at }}</td>
                     <td class="text-center">                
                       <form action="dish/{{ $dish->id }} " method="post">

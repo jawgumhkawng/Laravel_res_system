@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DishCreateRequest extends FormRequest
+class CategoryCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,8 @@ class DishCreateRequest extends FormRequest
     {
         return [
            'name' => 'required',
-           'category' => 'required',
-           'dish_image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+           'description' => 'required',
+           
         ];
     }
 }

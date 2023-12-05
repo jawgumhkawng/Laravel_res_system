@@ -4,25 +4,69 @@ namespace App\Http\Controllers;
 
 use App\Models\Dish;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Foreach_;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class OrdersController extends Controller
 {
    
 
-    public function index(Table $table)
+    public function index(Request $request)
     {
-
-        $dishes = Dish::OrderBy('id','desc')->get();
+ 
+       
         $tables = Table::all();
         $orders = Order::where('status',4)->get();
         $rawstatus = config('res.order_status');
         $status = array_flip($rawstatus); 
+
+        if(isset($request->key)){
+             $key = $request->key;
+            $dishes = Dish::where(function($query) use ($key) {
+            $query->where('name', 'like', '%' . $key .'%');
+           
+        })
+        
+        ->latest()
+        ->paginate(6)
+        ->withQueryString();
+
         return view('/order_form', compact('dishes','tables','orders','status'));
+        }
+
+        else
+        {
+        $dishes = Dish::latest()->paginate(6);
+        
+         return view('/order_form', compact('dishes','tables','orders','status'));
+
+        }
+
     }
+
+ 
+   
+    
+    // public function search(Request $request) 
+    // {
+  
+
+    //       $key = $request->key;
+    //       $dishesSearch = Dish::where(function($query) use ($key) {
+    //         $query->where('name', 'like', '%' . $key .'%');
+           
+    //     })
+        
+    //     ->latest()
+    //     ->paginate(3)
+    //     ->withQueryString();
+
+    //     return view('/order_form', compact('dishesSearch'));
+    // }
 
     public function saveOrder($orderId,$dish_id,$request) 
      {

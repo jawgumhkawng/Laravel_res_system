@@ -31,9 +31,13 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/msater', [App\Http\Controllers\HomeController::class, 'admin'])->name('layouts.master');
+
 Route::get('/', [App\Http\Controllers\OrdersController::class, 'index'])->name('order.form');
 Route::post('order_submit', [App\Http\Controllers\OrdersController::class, 'submit'])->name('order.submit');
 Route::get('order/{order}/serve', [App\Http\Controllers\OrdersController::class, 'serve']);
+Route::get('search', [App\Http\Controllers\OrdersController::class, 'index'])->name('order.search');
+
 
 
 Route::get('order',[App\Http\Controllers\DishesController::class, 'order'])->name('kitchen.order');
@@ -44,3 +48,4 @@ Route::get('order/{order}/ready', [App\Http\Controllers\DishesController::class,
 
 Route::resource('dish', App\Http\Controllers\DishesController::class);
 
+Route::resource('category', App\Http\Controllers\CategoryController::class);
