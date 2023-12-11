@@ -41,7 +41,7 @@
                     @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                      @enderror
-                    <input type="text" class="form-control{{ ($errors->first('name') ? " form-error" : "") }} " name="name" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="text" class="form-control{{ ($errors->first('name') ? " form-error" : "") }} " name="name" id="exampleInputEmail1" placeholder="Enter name">
                   </div>
                   
                  <div class="form-group">

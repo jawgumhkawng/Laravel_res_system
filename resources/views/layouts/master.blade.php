@@ -138,10 +138,10 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link active">
-                <i class="nav-icon fas fa-th"></i>
+              <a href="/home" class="nav-link {{ Request::segment(1) == 'home' ? 'active' : '' }}">
+                <i class=" nav-icon fas fa-home"></i>
                 <p>
-                  Widgets
+                  Home Page
                   <span class="right badge badge-danger">New</span>
                 </p>
               </a>

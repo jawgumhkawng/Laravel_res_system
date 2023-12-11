@@ -12,9 +12,10 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Category Page</li>
-                <li class="breadcrumb-item ">Category Create Page</li>
+                <li class="breadcrumb-item ">Category Edit Page</li>
+
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -29,30 +30,30 @@
           <div class="col-md-12">
         <div class="card bg-dark">
               <div class="card-header">
-                <h3 class="card-title">Create Category</h3>
+                <h3 class="card-title">Edit Category</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/category" method="POST" enctype="multipart/form-data">
+              <form action="/category/{{ $category->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Category Name</label>
                     @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                      @enderror
-                    <input type="text" class="form-control{{ ($errors->first('name') ? " form-error" : "") }} " name="name" id="exampleInputEmail1" placeholder="Enter name">
-                  </div>
-                  
-                 <div class="form-group">
-                  <label for="exampleSelectRounded0">description</label>
-                   @error('description')
+                    <input type="text" class="form-control{{ ($errors->first('name') ? " form-error" : "") }} " name="name" value="{{ old('name',$category->name) }}" id="exampleInputEmail1" placeholder="Enter email">
+                  </div>            
+                </div>
+                 <div class="card-body">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Category Description</label>
+                    @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    <input type="text" class="form-control{{ ($errors->first('name') ? " form-error" : "") }} " name="description" id="exampleInputEmail1" placeholder="Enter desc">
-
-                 </div>
-               
+                     @enderror
+                    <input type="text" class="form-control{{ ($errors->first('description') ? " form-error" : "") }} " name="description" value="{{ old('description',$category->description) }}" id="exampleInputEmail1" placeholder="Enter email">
+                  </div>            
                 </div>
                 <!-- /.card-body -->
 
@@ -72,4 +73,4 @@
       <!-- Main content -->
            <!-- /.content -->
 </div>
- @endsection
+    @endsection

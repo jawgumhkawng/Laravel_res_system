@@ -27,20 +27,21 @@ class HomeController extends Controller
      */
     public function index(Dish $dish, Category $category, User $user, Order $order)
     {
-        $dishs = Dish::all();
-        $users = User::all();
-        $categories = Category::all();
+        $dishs = Dish::count();
+        $users = User::count();
+        $categories = Category::count();
+        $orders = Order::count();
       
-        return view('/home', compact('dishs','categories','users'));
+        return view('/home', compact('dishs','categories','users','orders'));
     }
 
       public function admin(Dish $dish, Category $category, User $user, Order $order)
     {
-        $dish = Dish::all();
-        $user = User::all();
-        $category = Category::all();
+        $dishs = Dish::count();
+        $orders = Order::count();
+        $categories = Category::count();
         
-        return view('layouts.master', compact('dish','category','user'));
+        return view('layouts.master', compact('dishs','categories','orders'));
     }
 
     

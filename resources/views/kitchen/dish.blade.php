@@ -517,9 +517,10 @@
             <table id="example2" class="table table-bordered table-striped table-dark">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th  class="text-center">Image</th>
+                    <th class="text-center">Name</th>
                     <th class="text-center">Category</th>
-                    <th class="text-center">Created</th>
+                    <th class="text-center">Created at</th>
                     <th class="text-center">#Action</th>
                     
                 </tr>
@@ -528,15 +529,18 @@
                 <tbody>
                 @foreach ($dishes as $dish )
                     <tr>
-                    <td>{{$dish->name}}</td>
+                      <td  class="text-center">
+                        <img src="{{ url('./images/'.$dish->image) }}" alt="" class="" style="border-radius: 6px" width="30px">
+                      </td>
+                    <td class="text-center">{{$dish->name}}</td>
                     <td class="text-center ">
-                      @if($dish->category->id == 1)
+                      @if($dish->category_id == 1)
                     <span class="btn btn-sm btn-success">{{$dish->category->name}}</span>
-                    @elseif($dish->category->id == 2)
+                    @elseif($dish->category_id == 2)
                     <span class="btn btn-sm btn-info">{{$dish->category->name}}</span>
-                    @elseif($dish->category->id == 3)
+                    @elseif($dish->category_id == 3)
                     <span class="btn btn-sm btn-warning">{{$dish->category->name}}</span>
-                    @elseif($dish->category->id == 4)
+                    @elseif($dish->category_id == 4)
                     <span class="btn btn-sm btn-secondary">{{$dish->category->name}}</span>
                     @else
                     <span class="btn btn-sm btn-danger">{{$dish->category->name}}</span>

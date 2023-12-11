@@ -21,9 +21,9 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+     public function create()
+    {   
+        return view('kitchen.category_create');
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryController extends Controller
         
         $Categories->save();
 
-        return redirect('category')->with('Created', 'Dish Created Successfully!');
+        return redirect('category')->with('Created', 'Category Created Successfully!');
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-         return view('kitchen.edit_cat', compact('categories'));
+         return view('kitchen.edit_category', compact('category'));
     }
 
     /**
@@ -73,14 +73,16 @@ class CategoryController extends Controller
        
         $category->save();
 
-        return redirect('category')->with('Updated', 'Dish Updated Successfully!');
+        return redirect('category')->with('Updated', 'Category Updated Successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect('category')->with('Deleted', 'Category Removed Successfully!');
     }
 }

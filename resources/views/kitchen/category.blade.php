@@ -61,7 +61,7 @@
         <div class="col-12">
             <div class="card bg-dark">
                 <div class="card-header">
-                <a href="/dish/create" class="card-title btn btn-info">
+                <a href="/category/create" class="card-title btn btn-info">
                <i class="fas fa-plus"></i>
                   &nbsp;Create New Categories
                 </a>
@@ -85,7 +85,7 @@
                     <td class="text-center ">{{$category->description}}</td>
                     <td class="text-center">{{ $category->created_at }}</td>
                     <td class="text-center">                
-                      <form action="dish/{{ $category->id }} " method="post">
+                      <form action="category/{{ $category->id }} " method="post">
                         @csrf
                         @method('DELETE')
                           <a href="category/{{ $category->id }}/edit" class="btn btn-sm btn-warning  "><i class="fas fa-cog"></i></a>

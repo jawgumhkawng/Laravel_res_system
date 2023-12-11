@@ -30,7 +30,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>{{ count($dishes) }}</h3>
+                  <h3>{{ $dishs }}</h3>
 
                   <p>All Dishes</p>
                 </div>
@@ -45,7 +45,7 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>{{ count($categories) }}</h3>
+                  <h3>{{ $categories }}</h3>
 
                   <p>All Category</p>
                 </div>
@@ -60,9 +60,9 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>{{ count($users) }}</h3>
+                  <h3>{{ $users }}</h3>
 
-                  <p>User Registrations</p>
+                  <p>Kitchen Admin</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -75,7 +75,7 @@
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>{{ count($dishes) }}</h3>
+                  <h3>{{ $orders }}</h3>
 
                   <p>All Orders</p>
                 </div>
